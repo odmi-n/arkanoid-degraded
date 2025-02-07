@@ -1,0 +1,105 @@
+/* Googleフォント適用 */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+/* 全体設定 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ゲーム画面の背景（テクスチャ適用） */
+#game-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background: url('background-texture.png'); /* テクスチャ画像を適用 */
+    background-size: 64px 64px; /* 繰り返しパターンのサイズ */
+    background-repeat: repeat;
+    background-position: center;
+    position: relative;
+    width: 100%;
+}
+
+/* スコアボード（ゲーム中のスコア表示） */
+#score-board {
+    position: absolute;
+    top: 3%;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 6px 12px;
+    border-radius: 5px;
+    font-family: 'Press Start 2P', cursive;
+}
+
+/* キャンバス（ゲームプレイ画面） */
+#gameCanvas {
+    background: url('background-texture.png'); /* テクスチャ適用 */
+    background-size: 64px 64px;
+    background-repeat: repeat;
+    background-position: center;
+    border: none; /* 枠線を消す */
+    display: block;
+    width: auto;
+    height: auto;
+    max-width: 480px;
+    max-height: 640px;
+}
+
+/* パドルデザイン */
+.paddle {
+    position: absolute;
+    bottom: 20px;
+    width: 75px;
+    height: 10px;
+    background: linear-gradient(to right, red, gray, red);
+    border: 2px solid black;
+    border-radius: 10px;
+}
+
+/* ボール */
+.ball {
+    width: 5px;
+    height: 5px;
+    background: palegoldenrod;
+    border-radius: 50%;
+    position: absolute;
+}
+
+/* ブロック（カラーバリエーション） */
+.brick {
+    width: 75px;
+    height: 20px;
+    margin: 5px;
+}
+
+.brick.red {
+    background: #D9534F;
+}
+
+.brick.blue {
+    background: #0095DD;
+}
+
+.brick.orange {
+    background: #F0AD4E;
+}
+
+.brick.green {
+    background: #5CB85C;
+}
+
+/* コピーライト */
+.copyright {
+    font-size: 12px;
+    color: red;
+    margin-top: 40px;
+    text-align: center;
+    font-family: 'Press Start 2P', cursive;
+}

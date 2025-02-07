@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <title>ブロック崩し</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="title-screen">
+    <div class="score-board">
+      <span>1UP</span> <span class="score">00</span>
+      <span class="high-score-text">HIGH SCORE</span> <span id="high-score">0</span>
+    </div>
+
+    <h1 class="game-title">BREAKOUT</h1>
+
+    <div class="menu">
+      <a href="game.html">
+        <button>▶ 1 PLAYER</button>
+      </a>
+    </div>
+
+    <p class="copyright">© BeEngineer 2025</p>
+  </div>
+
+  <script>
+    // 最高スコアをローカルストレージから取得して表示
+    const highScore = localStorage.getItem('highScore') || 0;
+    document.getElementById('high-score').textContent = highScore;
+  </script>
+</body>
+</html>
