@@ -47,11 +47,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const brickPadding = 3;  // ブロック間の間隔
 
     // 白枠を少し内側に描きたい→ 5pxほど余白
-    // 最大9列の場合:
-    //    左端からx=5 + 9*(brickWidth+brickPadding) - brickPadding = 5 + 9*53 - 3 = 5 + 477 - 3 = 479
-    //    → 右端が 479 + brickWidth(=50) ではなく、「ブロックの左端+幅」ではなく
-    //       ここでは計算が少し混同してますが、実際は各列にbrickWidthあるので
-    //       x=5 + c*(50+3)を最後の列 c=8 の場合: 5 + 8*53= 5 +424=429 → 429+50=479 → 幅480に収まる
     const brickOffsetLeft = 5; 
     // 上側を少し空けてスコア表示と被らないように
     const brickOffsetTop = 60; 
@@ -171,7 +166,6 @@ document.addEventListener("DOMContentLoaded", () => {
         ctx.font = "16px 'Press Start 2P'";
         ctx.fillStyle = "red";
         ctx.textAlign = "left";
-        // 例: x=20, y=35 あたり
         ctx.fillText(`HIGH SCORE: ${highScore}`, 20, 35);
     }
 
@@ -315,6 +309,9 @@ document.addEventListener("DOMContentLoaded", () => {
                     dy = -dy;
                 } else if (y + dy > canvas.height - ballRadius) {
                     // 下端を超えた → result.htmlへ
+                    // ★ここで今回スコアを保存
+                    localStorage.setItem("lastScore", score);
+
                     window.location.href = "result.html";
                     return;
                 }

@@ -1,1 +1,53 @@
-result
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BREAKOUT - Result</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="result.css">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="result-screen">
+        <h1 class="result-title">GAME OVER</h1>
+        
+        <div class="result-scores">
+            <div class="score-item">
+                <span class="score-label">SCORE</span>
+                <span id="final-score" class="score-value">0000</span>
+            </div>
+            <div class="score-item">
+                <span class="high-score-text">HIGH SCORE</span>
+                <span id="high-score" class="score-value">0000</span>
+            </div>
+        </div>
+
+        <div class="result-menu">
+            <button onclick="window.location.href='index.html'" class="menu-button">MAIN MENU</button>
+            <button onclick="window.location.href='game.html'" class="menu-button">RETRY</button>
+        </div>
+
+        <div class="copyright">
+            © BeEngineer 2025
+        </div>
+    </div>
+
+    <!-- スコア・ハイスコア読み込み用スクリプト -->
+    <script>
+    document.addEventListener("DOMContentLoaded", () => {
+        // 表示箇所の要素を取得
+        const finalScoreElem = document.getElementById("final-score");
+        const highScoreElem = document.getElementById("high-score");
+
+        // localStorageから lastScore / highScore を読み込み
+        const lastScore = localStorage.getItem("lastScore") ? parseInt(localStorage.getItem("lastScore")) : 0;
+        const bestScore = localStorage.getItem("highScore") ? parseInt(localStorage.getItem("highScore")) : 0;
+
+        // 4桁ゼロ埋めしたい場合など
+        finalScoreElem.textContent = lastScore.toString().padStart(4, "0");
+        highScoreElem.textContent  = bestScore.toString().padStart(4, "0");
+    });
+    </script>
+</body>
+</html>

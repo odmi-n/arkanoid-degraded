@@ -1,0 +1,82 @@
+/* result.css */
+#result-screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background: black;
+    padding: 20px;
+}
+
+.result-title {
+    font-size: 2.5rem;
+    color: #ff0000;
+    text-shadow: 3px 3px 0px #ffffff;
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+}
+
+.result-scores {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+}
+
+.score-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.score-label {
+    color: #ffffff;
+    font-size: 1.2rem;
+}
+
+.high-score-text {
+    color: #ff0000 !important;
+    font-size: 1.2rem;
+}
+
+.score-value {
+    color: #ffffff;
+    font-size: 2rem;
+    letter-spacing: 2px;
+}
+
+.result-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    width: 100%;
+    max-width: 300px;
+}
+
+.menu-button {
+    background: #000000;
+    color: #ffffff;
+    border: 3px solid #ffffff;
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    cursor: pointer;
+    font-family: 'Press Start 2P', cursive;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+}
+
+.menu-button:hover {
+    background: #ffffff;
+    color: #000000;
+    transform: translateY(-2px);
+}
+
+.copyright {
+    position: fixed;
+    bottom: 20px;
+    color: #ff0000;
+    font-size: 0.8rem;
+    margin-top: 2rem;
+}

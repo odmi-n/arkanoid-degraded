@@ -58,6 +58,13 @@ body {
   margin-bottom: 30px;
 }
 
+.game-title2{
+  font-size: 16px;
+  color: white;
+  text-transform: uppercase;
+  text-shadow: 3px 3px 0px red, 6px 6px 0px blue;
+}
+
 /* メニューのボタン */
 .menu {
   display: flex;
