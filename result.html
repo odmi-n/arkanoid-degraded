@@ -10,7 +10,8 @@
 </head>
 <body>
     <div id="result-screen">
-        <h1 class="result-title">GAME OVER</h1>
+        <!-- ここのタイトルはJSで切り替えるので、初期値は "GAME OVER" のままでもOKです -->
+        <h1 id="result-title" class="result-title">GAME OVER</h1>
         
         <div class="result-scores">
             <div class="score-item">
@@ -39,12 +40,24 @@
         // 表示箇所の要素を取得
         const finalScoreElem = document.getElementById("final-score");
         const highScoreElem = document.getElementById("high-score");
+        const resultTitle = document.getElementById("result-title");
 
         // localStorageから lastScore / highScore を読み込み
         const lastScore = localStorage.getItem("lastScore") ? parseInt(localStorage.getItem("lastScore")) : 0;
         const bestScore = localStorage.getItem("highScore") ? parseInt(localStorage.getItem("highScore")) : 0;
 
-        // 4桁ゼロ埋めしたい場合など
+        // ゲームオーバーかクリアかを判定するフラグ
+        const resultType = localStorage.getItem("resultType"); // "over" or "clear"
+
+        // タイトル切り替え
+        if (resultType === "clear") {
+            resultTitle.textContent = "GAME CLEAR";
+        } else {
+            // デフォルト or "over"
+            resultTitle.textContent = "GAME OVER";
+        }
+
+        // 4桁ゼロ埋め
         finalScoreElem.textContent = lastScore.toString().padStart(4, "0");
         highScoreElem.textContent  = bestScore.toString().padStart(4, "0");
     });

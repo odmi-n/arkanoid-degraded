@@ -62,9 +62,9 @@ document.addEventListener("DOMContentLoaded", () => {
         return `#${r}${g}${b}`;
     }
 
-    // ランダム行数(rowCount)ごとに 列数(colCount:4～9)を作る
+    // ランダム行数(rowCount)ごとに 列数(colCount:4〜9)を作る
     for (let r = 0; r < rowCount; r++) {
-        const colCount = Math.floor(Math.random() * 6) + 4; // 4〜9
+        const colCount = Math.floor(Math.random() * 6) + 4;
         bricks[r] = [];
         for (let c = 0; c < colCount; c++) {
             // 80%程度の確率でブロックを配置
@@ -128,16 +128,13 @@ document.addEventListener("DOMContentLoaded", () => {
     document.addEventListener("keyup", keyUpHandler);
 
     // =========================
-    //  描画関数
+    //  背景・枠などの描画関数
     // =========================
-
-    // 背景を暗い青で塗りつぶす
     function drawBackground() {
         ctx.fillStyle = "darkblue";
         ctx.fillRect(0, 0, canvas.width, canvas.height);
     }
 
-    // 白枠を一つだけ描画
     function drawWhiteFrame() {
         ctx.save();
         ctx.strokeStyle = "white";
@@ -161,7 +158,9 @@ document.addEventListener("DOMContentLoaded", () => {
         ctx.fillText("Press Space to Start", canvas.width / 2, canvas.height / 2);
     }
 
-    // HIGH SCORE の位置を少し下げて左寄りに
+    // =========================
+    //  スコア表示
+    // =========================
     function drawHighScore() {
         ctx.font = "16px 'Press Start 2P'";
         ctx.fillStyle = "red";
@@ -169,7 +168,9 @@ document.addEventListener("DOMContentLoaded", () => {
         ctx.fillText(`HIGH SCORE: ${highScore}`, 20, 35);
     }
 
-    // ブロックとの衝突判定
+    // =========================
+    //  ブロック衝突判定
+    // =========================
     function collisionDetection() {
         for (let r = 0; r < bricks.length; r++) {
             for (let c = 0; c < bricks[r].length; c++) {
@@ -196,6 +197,23 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
+    // =========================
+    //  ブロック全消し判定
+    // =========================
+    function allBricksCleared() {
+        for (let r = 0; r < bricks.length; r++) {
+            for (let c = 0; c < bricks[r].length; c++) {
+                if (bricks[r][c].status === 1) {
+                    return false;
+                }
+            }
+        }
+        return true; 
+    }
+
+    // =========================
+    //  ボール・パドル描画
+    // =========================
     function drawBall() {
         ctx.beginPath();
         ctx.arc(x, y, ballRadius, 0, Math.PI * 2);
@@ -309,9 +327,10 @@ document.addEventListener("DOMContentLoaded", () => {
                     dy = -dy;
                 } else if (y + dy > canvas.height - ballRadius) {
                     // 下端を超えた → result.htmlへ
-                    // ★ここで今回スコアを保存
+                    // ゲームオーバーなので
                     localStorage.setItem("lastScore", score);
-
+                    // ★ resultType を "over" に
+                    localStorage.setItem("resultType", "over");
                     window.location.href = "result.html";
                     return;
                 }
@@ -337,6 +356,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 // ブロック衝突判定
                 collisionDetection();
+
+                // ブロック全消し判定
+                if (allBricksCleared()) {
+                    // クリア時
+                    localStorage.setItem("lastScore", score);
+                    // ★ resultType を "clear" に
+                    localStorage.setItem("resultType", "clear");
+                    window.location.href = "result.html";
+                    return;
+                }
 
                 // ボール座標更新
                 x += dx;
